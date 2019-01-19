@@ -11,10 +11,6 @@ import java.util.Scanner;
 import java.util.Set;
 import redis.clients.jedis.Jedis;
 
-/**
- *
- * @author dangth8
- */
 public class RedisConnector {
 
     /**
