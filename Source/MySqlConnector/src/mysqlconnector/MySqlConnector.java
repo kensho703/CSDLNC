@@ -19,10 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author dangth8
- */
 public class MySqlConnector {
 
 //    private static String _dbHost = "10.240.194.44";
