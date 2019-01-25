@@ -11,6 +11,10 @@ import java.util.Scanner;
 import java.util.Set;
 import redis.clients.jedis.Jedis;
 
+/**
+ *
+ * @author kensho703
+ */
 public class RedisConnector {
 
     /**
@@ -38,6 +42,7 @@ public class RedisConnector {
             System.out.println("0. Exit ");
             System.out.println("1. Get");
             System.out.println("2. Set");
+            System.out.println("3. Delete");
             int option = scanner.nextInt();
 
             while (option != 0) {
@@ -48,15 +53,21 @@ public class RedisConnector {
                         String keyname = scanner.nextLine();
                         Set<String> names = jedis.keys(keyname);
                         java.util.Iterator<String> it = names.iterator();
+                        long start = System.currentTimeMillis();
                         while (it.hasNext()) {
                             String s = it.next();
                             System.out.println("key:" + s + " - value :" + jedis.get(s));
+//                            jedis.get(s);
                         }
+                        long end = System.currentTimeMillis();
+                        long duration = end - start;
+                        System.out.println("Executed time of query : " + duration + " ms");
 
                         System.out.println("Enter number to choose option: ");
                         System.out.println("0. Exit ");
                         System.out.println("1. Get");
                         System.out.println("2. Set");
+                        System.out.println("3. Delete");
                         option = scanner.nextInt();
                     }
 
@@ -67,12 +78,34 @@ public class RedisConnector {
                         String keyname = scanner.nextLine();
                         System.out.println("enter value:");
                         String value = scanner.nextLine();
+                        long start = System.currentTimeMillis();
                         jedis.set(keyname, value);
                         System.out.println("Set key:" + keyname + " -> value :" + jedis.get(keyname) + " success.");
+                        long end = System.currentTimeMillis();
+                        long duration = end - start;
+                        System.out.println("Executed time of query : " + duration + " ms");
                         System.out.println("Enter number to choose option: ");
                         System.out.println("0. Exit ");
                         System.out.println("1. Get");
                         System.out.println("2. Set");
+                        System.out.println("3. Delete");
+                        option = scanner.nextInt();
+                    }
+                    break;
+                    case 3: {
+                        scanner = new Scanner(System.in);
+                        System.out.println("enter key:");
+                        String keyname = scanner.nextLine();
+                        long start = System.currentTimeMillis();
+                        jedis.del(keyname);
+                        long end = System.currentTimeMillis();
+                        long duration = end - start;
+                        System.out.println("Executed time of query : " + duration + " ms");
+                        System.out.println("Enter number to choose option: ");
+                        System.out.println("0. Exit ");
+                        System.out.println("1. Get");
+                        System.out.println("2. Set");
+                        System.out.println("3. Delete");
                         option = scanner.nextInt();
                     }
                     break;
